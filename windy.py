@@ -18,15 +18,17 @@ def main():
     def try_create_directory():
         for check in range(0,len(directories)):
             if not path.exists(directories[check]):
-                make_directory = "mkdir {}".format(directories[check])
+                make_directory = "mkdir /home/{}/Downloads/{}".format(USER,directories[check])
                 os.system(make_directory)
 
     def extention_check(file):
         USER = os.environ.get('USER')
         extention = os.path.splitext("/home/{}/Downloads/{}".format(USER,file))
         file_ext = extention[1]
-        if file_ext in file_types:
-            
+        return file_ext
+
+
+
 
 
     ## Funtion to check file extention
@@ -42,8 +44,18 @@ def main():
         ## Striping new line character
         for line in lines:
             file = format(line.strip())
-            extention_check(file)
+            result = extention_check(file)
+            if result in file_types:
+                for fle in range(0,len(file_types)):
+                    if result in file_types[fle]:
+                        command = "mv {} exe".format(file)
+                        os.system(command)
+                        os.system("rm files.etm")
 
+    ## Function initilizations
+    try_create_directory()
     check_fileExtention()
+
+
 if __name__ == "__main__":
     main()
