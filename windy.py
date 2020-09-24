@@ -8,6 +8,8 @@ import os.path
 from os import path
 
 def main():
+    global USER
+    USER = os.environ.get('USER')
 
 
     file_types = [".exe",".aif",".cda",".mid",".mp3",".mpa",".wav",
@@ -15,14 +17,14 @@ def main():
     directories = ["exe","aif","cda","mid","mp3","mpa","wav",
                     "sh","deb","java","js","html","txt","py"]
 
-    def try_create_directory():
-        for check in range(0,len(directories)):
-            if not path.exists(directories[check]):
-                make_directory = "mkdir /home/{}/Downloads/{}".format(USER,directories[check])
-                os.system(make_directory)
+#    def try_create_directory():
+        #for check in range(0,len(directories)):
+        #    if not path.exists(directories[check]):
+        #        make_directory = "mkdir /home/{}/Downloads/{}".format(USER,directories[check])
+        #        os.system(make_directory)
 
     def extention_check(file):
-        USER = os.environ.get('USER')
+
         extention = os.path.splitext("/home/{}/Downloads/{}".format(USER,file))
         file_ext = extention[1]
         return file_ext
@@ -35,10 +37,10 @@ def main():
     def check_fileExtention():
         ## Shell execution
         USER = os.environ.get('USER')
-        command = "ls /home/{}/Downloads/ > files.etm".format(USER)
+        command = "ls /home/{}/Downloads/ > tmp/files.etm".format(USER)
         os.system(command)
         ## Reading lines from "files.etm"
-        open_fileEXTM = open('files.etm','r')
+        open_fileEXTM = open('tmp/files.etm','r')
         lines = open_fileEXTM.readlines()
         count = 0
         ## Striping new line character
@@ -48,12 +50,11 @@ def main():
             if result in file_types:
                 for fle in range(0,len(file_types)):
                     if result in file_types[fle]:
-                        command = "mv {} exe".format(file)
+                        command = "mv /home/{}/Downloads/{} ~/Downloads/exe".format(USER,file)
                         os.system(command)
-                        os.system("rm files.etm")
 
     ## Function initilizations
-    try_create_directory()
+    #try_create_directory()
     check_fileExtention()
 
 
