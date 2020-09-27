@@ -13,9 +13,9 @@ def main():
 
 
     file_types = [".exe",".aif",".cda",".mid",".mp3",".mpa",".wav",
-                    ".sh",".deb",".java",".js",".html",".txt",".py"]
+                    ".sh",".deb",".java",".js",".html",".txt",".py",".bin"]
     directories = ["exe","aif","cda","mid","mp3","mpa","wav",
-                    "sh","deb","java","js","html","txt","py"]
+                    "sh","deb","java","js","html","txt","py","bin"]
 
 #    def try_create_directory():
         #for check in range(0,len(directories)):
@@ -50,7 +50,7 @@ def main():
             if result in file_types:
                 for fle in range(0,len(file_types)):
                     if result in file_types[fle]:
-                        command = "mv /home/{}/Downloads/{} ~/Downloads/exe".format(USER,file)
+                        command = "mv /home/{}/Downloads/{} ~/Downloads/{}".format(USER,file,result[1:])
                         os.system(command)
 
     ## Function initilizations
@@ -60,3 +60,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
