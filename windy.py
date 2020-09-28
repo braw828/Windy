@@ -6,6 +6,8 @@
 import os
 import os.path
 from os import path
+import locals.windy_blueprints
+from locals.windy_blueprints import create_others
 
 def main():
     global USER
@@ -17,14 +19,16 @@ def main():
     directories = ["exe","aif","cda","mid","mp3","mpa","wav",
                     "sh","deb","java","js","html","txt","py","bin"]
 
-#    def try_create_directory():
-        #for check in range(0,len(directories)):
-        #    if not path.exists(directories[check]):
-        #        make_directory = "mkdir /home/{}/Downloads/{}".format(USER,directories[check])
-        #        os.system(make_directory)
+    def try_create_directory():
+        for check in range(0,len(directories)):
+            if not path.exists("/home/{}/Downloads/".format(USER) + directories[check]):
+                make_directory = "mkdir /home/{}/Downloads/{}".format(USER,directories[check])
+                os.system(make_directory)
+            else:
+                locals.windy_blueprints.move_on()
+
 
     def extention_check(file):
-
         extention = os.path.splitext("/home/{}/Downloads/{}".format(USER,file))
         file_ext = extention[1]
         return file_ext
@@ -53,11 +57,15 @@ def main():
                         command = "mv /home/{}/Downloads/{} ~/Downloads/{}".format(USER,file,result[1:])
                         os.system(command)
 
+
+
+
+
     ## Function initilizations
-    #try_create_directory()
+    try_create_directory()
     check_fileExtention()
+    create_others()
 
 
 if __name__ == "__main__":
     main()
-
