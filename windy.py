@@ -4,28 +4,22 @@
 ## Language: Python
 
 import os
+import shutil
 import os.path
 from os import path
 import locals.windy_blueprints
-from locals.windy_blueprints import create_others
+from locals.windy_blueprints import (move_on,
+downloads_folder,windyFiles,windyFiles_content)
 
-def main():
+def windy():
     global USER
     USER = os.environ.get('USER')
-
 
     file_types = [".exe",".aif",".cda",".mid",".mp3",".mpa",".wav",
                     ".sh",".deb",".java",".js",".html",".txt",".py",".bin"]
     directories = ["exe","aif","cda","mid","mp3","mpa","wav",
                     "sh","deb","java","js","html","txt","py","bin"]
 
-    def try_create_directory():
-        for check in range(0,len(directories)):
-            if not path.exists("/home/{}/Downloads/".format(USER) + directories[check]):
-                make_directory = "mkdir /home/{}/Downloads/{}".format(USER,directories[check])
-                os.system(make_directory)
-            else:
-                locals.windy_blueprints.move_on()
 
 
     def extention_check(file):
@@ -54,18 +48,36 @@ def main():
             if result in file_types:
                 for fle in range(0,len(file_types)):
                     if result in file_types[fle]:
-                        command = "mv /home/{}/Downloads/{} ~/Downloads/{}".format(USER,file,result[1:])
+                        command = "mv /home/{}/Downloads/'{}' ~/WindyFiles/DownloadsFolder/{}".format(USER,file,result[1:])
                         os.system(command)
 
+    def move_to_others():
+    	import os
+    	os.system("ls /home/{}/Downloads/ > tmp/move_on.etm".format(os.environ.get('USER')))
+    	open_fileEXTM = open('tmp/move_on.etm','r')
+    	lines = open_fileEXTM.readlines()
+    	count = 0
+    	for line in lines:
+            file = format(line.strip())
+            if file not in directories:
+
+                if not os.path.exists(f"/home/{os.environ.get('USER')}/WindyFiles/OtherFiles/{file}"):
+                    os.system(f"mv ~/Downloads/'{file}'  ~/WindyFiles/OtherFiles/")
+
+                else:
+                    os.system(f"rm -rf /home/{os.environ.get('USER')}/Downloads/'{file}'")
+                    move_on()
 
 
 
 
     ## Function initilizations
-    try_create_directory()
+    windyFiles()
+    windyFiles_content()
     check_fileExtention()
-    create_others()
+    move_to_others()
+
 
 
 if __name__ == "__main__":
-    main()
+    windy()
