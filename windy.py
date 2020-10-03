@@ -2,7 +2,6 @@
 ## Script type: Everyday use
 ## Script to check file extention and move to relative directory
 ## Language: Python
-
 import os
 import shutil
 import os.path
@@ -15,6 +14,7 @@ def windy():
     global USER
     USER = os.environ.get('USER')
 
+    download_status = ".part"
     file_types = [".exe",".aif",".cda",".mid",".mp3",".mpa",".wav",
                     ".sh",".deb",".java",".js",".html",".txt",".py",".bin"]
     directories = ["exe","aif","cda","mid","mp3","mpa","wav",
@@ -23,12 +23,9 @@ def windy():
 
 
     def extention_check(file):
-        extention = os.path.splitext("/home/{}/Downloads/{}".format(USER,file))
-        file_ext = extention[1]
-        return file_ext
-
-
-
+            extention = os.path.splitext("/home/{}/Downloads/{}".format(USER,file))
+            file_ext = extention[1]
+            return file_ext
 
 
     ## Funtion to check file extention

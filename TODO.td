@@ -11,4 +11,5 @@ WINDY Your friendly file sorteer
 \\Make a separate folder for the extensions directories
 \\Create a tmp file
 \\rework everything move from downloads to out downloads_folder
-\\Make a function to add file extensions
+\\Make a function to add file extensions with command_line options
+\\Make Windy package
