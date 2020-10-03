@@ -1,6 +1,6 @@
 
 
-░
+![](locals/ezgif-6-2423690e64e8.gif)
 
 <p class="has-line-data" data-line-start="0" data-line-end="1">🅦🅘🅝🅓🅨</p>
 <p class="has-line-data" data-line-start="6" data-line-end="7">Windy is a bot powered by python3.</p>
